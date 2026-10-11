@@ -1,5 +1,6 @@
 import { getDictionary } from "@/lib/dictionaries";
 import { getDirection, isLocale, otherLocale, resolveLocale } from "@/lib/i18n";
+import { clamp, sceneProgress } from "@/lib/scroll";
 import { THEME_KEY, applyTheme, nextTheme, parseTheme } from "@/lib/theme";
 
 const keysOf = (value: unknown, prefix = ""): string[] =>
@@ -30,6 +31,22 @@ describe("i18n", () => {
 
   it("keeps both dictionaries structurally identical", () => {
     expect(keysOf(getDictionary("fa")).sort()).toEqual(keysOf(getDictionary("en")).sort());
+  });
+});
+
+describe("scroll", () => {
+  it("clamps", () => {
+    expect(clamp(-1)).toBe(0);
+    expect(clamp(2)).toBe(1);
+    expect(clamp(0.4)).toBe(0.4);
+  });
+
+  it("computes pinned-scene progress", () => {
+    expect(sceneProgress(100, 2000, 800)).toBe(0); // not reached yet
+    expect(sceneProgress(0, 2000, 800)).toBe(0);
+    expect(sceneProgress(-600, 2000, 800)).toBe(0.5);
+    expect(sceneProgress(-5000, 2000, 800)).toBe(1); // scrolled past
+    expect(sceneProgress(-10, 800, 800)).toBe(0); // no travel distance: avoids divide by zero
   });
 });
 
