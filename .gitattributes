@@ -1,0 +1,10 @@
+# Normalise line endings (also on Windows) so diffs and patches stay clean.
+* text=auto eol=lf
+
+# Media is binary: never diff or convert it.
+*.mp4 binary
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.webp binary
+*.webm binary
