@@ -1,6 +1,6 @@
 import type { Locale } from "./i18n";
 
-export const sceneIds = ["hero", "signature", "layers"] as const;
+export const sceneIds = ["hero", "signature", "layers", "oven"] as const;
 export type SceneId = (typeof sceneIds)[number];
 
 type Story = { title: string; body: string; cta: string };
@@ -14,6 +14,7 @@ export type Dictionary = {
     hero: Story;
     signature: Story;
     layers: Story & { eyebrow: string };
+    oven: Story;
   };
 };
 
@@ -39,6 +40,11 @@ const en: Dictionary = {
       body: "A slow-risen base, a bright tomato sauce and cheese that stretches. Each layer is made in-house every day.",
       cta: "Explore more",
     },
+    oven: {
+      title: "Finished by fire",
+      body: "Our dome oven runs at 450°C. The flames leave the blistered crust and smoky edge you only get from wood.",
+      cta: "Explore the menu",
+    },
   },
 };
 
@@ -63,6 +69,11 @@ const fa: Dictionary = {
       title: "هر لایه اهمیت دارد",
       body: "خمیری که آرام ور آمده، سس گوجهٔ شاداب و پنیری که کش می‌آید. همهٔ لایه‌ها هر روز در همین آشپزخانه تهیه می‌شوند.",
       cta: "بیشتر بدانید",
+    },
+    oven: {
+      title: "تمام‌شده با آتش",
+      body: "کورهٔ گنبدی ما روی ۴۵۰ درجه کار می‌کند. شعله، لبهٔ تاول‌زده و عطر دودی‌ای را می‌دهد که فقط هیزم می‌سازد.",
+      cta: "دیدن منو",
     },
   },
 };

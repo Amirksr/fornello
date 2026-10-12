@@ -2,7 +2,7 @@ import type { CSSProperties } from "react";
 import { getDictionary } from "@/lib/dictionaries";
 import { getDirection, type Locale } from "@/lib/i18n";
 import { sceneImages, sceneVideos, type SceneVideo } from "@/lib/images";
-import { PizzaArt } from "./Art";
+import { OvenArt, PizzaArt } from "./Art";
 import { Embers, Smoke } from "./Embers";
 import { Flame } from "./Flame";
 import { Header } from "./Header";
@@ -69,6 +69,14 @@ export function Landing({ locale }: { locale: Locale }) {
                 <div className="absolute inset-x-[8%] top-[26%] aspect-square" style={spread(-1)}><PizzaArt seed={33} layers={["cheese", "basil"]} className="squash size-full" /></div>
               </div>
             )}
+          </div>
+        </Scene>
+
+        <Scene id="oven" glow="70% 55%" dark={!!(sceneVideos.oven || sceneImages.oven)}>
+          {sceneVideos.oven ? scrub(sceneVideos.oven) : sceneImages.oven && <Photo src={sceneImages.oven} alt={scenes.oven.title} />}
+          <div className={grid}>
+            <SceneText title={scenes.oven.title} body={scenes.oven.body}>{toMenu}</SceneText>
+            {!sceneVideos.oven && !sceneImages.oven && <div className={art}><OvenArt className="oven absolute inset-0 m-auto h-full w-full" /></div>}
           </div>
         </Scene>
       </main>

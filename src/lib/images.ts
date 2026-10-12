@@ -9,6 +9,7 @@ export const sceneImages: Partial<Record<ImageSlot, string>> = {
   hero: "/images/hero-fire.jpg",
   signature: "/images/signature.jpg",
   layers: "/images/layers.jpg",
+  oven: "/images/oven.jpg",
 };
 
 /**
@@ -22,4 +23,5 @@ export const sceneVideos: Partial<Record<VideoSlot, SceneVideo>> = {
   hero: { src: "/videos/hiro.mp4", poster: "/videos/hiro-poster.jpg", ox: 46, oxMobile: 48 },
   signature: { src: "/videos/signature.mp4", poster: "/videos/signature-poster.jpg", ox: 46, oxMobile: 48 },
   layers: { src: "/videos/layers.mp4", poster: "/videos/layers-poster.jpg", ox: 80, oxMobile: 70 },
+  oven: { src: "/videos/oven.mp4", poster: "/videos/oven-poster.jpg", ox: 70, oxMobile: 62 },
 };
