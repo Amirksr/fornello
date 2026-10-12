@@ -142,7 +142,20 @@ body { background: var(--bg); color: var(--fg); font-family: var(--font-sans); -
 .photo-fade-out { opacity: clamp(0, calc(1 - (var(--p) - 0.12) * 3), 1); }
 .photo-fade-in  { opacity: clamp(0, calc((var(--p) - 0.12) * 3), 1); }
 
+/* Collection: a wide band that fades into the stage on every side. */
+/* Flex centering keeps the (possibly wider-than-screen) image centred in both LTR and RTL. */
+.collection-band { position: absolute; inset-inline: 0; bottom: 7svh; overflow: hidden; display: flex; justify-content: center; }
+.collection-inner {
+  position: relative; flex: none; width: max(820px, min(100vw, 150svh)); aspect-ratio: var(--band-ar, 1276 / 478);
+  transform: scale(calc(1.02 + var(--p) * 0.08));
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent), linear-gradient(to right, transparent, #000 9%, #000 91%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent), linear-gradient(to right, transparent, #000 9%, #000 91%, transparent);
+  mask-composite: intersect;
+}
+
 @media (min-width: 768px) { .fit-ratio { width: auto; height: 100%; aspect-ratio: var(--ar); } }
+@media (max-width: 767px) { .collection-band { bottom: 20svh; } }
 
 /* Hero: black-background photo blends into the stage; it drifts (parallax + idle float), never rotates. */
 .photo-blend { mix-blend-mode: screen; }
@@ -201,3 +214,18 @@ body { background: var(--bg); color: var(--fg); font-family: var(--font-sans); -
   .ember, .smoke, .tongue, .flame-glow, .photo-drift img { animation: none; }
   .ember, .smoke { display: none; }
 }
+
+/* Scroll-scrubbed video: a frame anchored to the end side (same fade as photos); the clip is cropped around --ox. */
+.scrub-wrap video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--ox, 50%) 50%; }
+@media (max-width: 767px) { .scrub-wrap video { object-position: var(--oxm, 50%) 50%; } }
+/* RTL: text sits on the right, so mirror the footage to keep the subject and the flame on the outer side. */
+:lang(fa) .scrub-wrap video { transform: scaleX(-1); }
+
+/* Collection video band (not mirrored in RTL: the clip has text printed in it). */
+.scrub-band video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+/* Video band: longer top/bottom fade; on phones show more of the width so side labels are not cut. */
+.scrub-band {
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 80%, transparent), linear-gradient(to right, transparent, #000 9%, #000 91%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 80%, transparent), linear-gradient(to right, transparent, #000 9%, #000 91%, transparent);
+}
+@media (max-width: 767px) { .scrub-band { width: max(620px, 100vw); } }

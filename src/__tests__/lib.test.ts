@@ -1,7 +1,7 @@
 import { getDictionary } from "@/lib/dictionaries";
 import { getDirection, isLocale, otherLocale, resolveLocale } from "@/lib/i18n";
 import { mulberry32 } from "@/lib/random";
-import { clamp, sceneProgress } from "@/lib/scroll";
+import { clamp, sceneProgress, videoTime } from "@/lib/scroll";
 import { THEME_KEY, applyTheme, nextTheme, parseTheme } from "@/lib/theme";
 
 const keysOf = (value: unknown, prefix = ""): string[] =>
@@ -86,5 +86,24 @@ describe("random", () => {
     expect(seq).toEqual(Array.from({ length: 50 }, () => b()));
     expect(seq.every((n) => n >= 0 && n < 1)).toBe(true);
     expect(mulberry32(8)()).not.toBe(seq[0]);
+  });
+});
+
+describe("videoTime", () => {
+  // 4s clip, plays across scene progress 0..0.8
+  it("maps progress linearly and holds the last frame", () => {
+    expect(videoTime(0, 4)).toBe(0);
+    expect(videoTime(0.4, 4)).toBeCloseTo(2, 5);
+    expect(videoTime(0.8, 4)).toBeCloseTo(4 - 1 / 24, 5); // one frame short of the end
+    expect(videoTime(1, 4)).toBeCloseTo(4 - 1 / 24, 5);
+    expect(videoTime(-0.2, 4)).toBe(0);
+  });
+
+  it("respects a custom range and guards bad input", () => {
+    expect(videoTime(0.3, 4, 0.2, 0.6)).toBeCloseTo(1, 5);
+    expect(videoTime(0.5, NaN)).toBe(0);
+    expect(videoTime(0.5, 0)).toBe(0);
+    expect(videoTime(0.5, 4, 0.6, 0.6)).toBe(0);
+    expect(videoTime(0.5, 0.01)).toBe(0); // clip shorter than one frame
   });
 });
