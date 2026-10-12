@@ -1,6 +1,6 @@
 import type { Locale } from "./i18n";
 
-export const sceneIds = ["hero", "signature", "layers", "oven", "collection", "craft"] as const;
+export const sceneIds = ["hero", "signature", "layers", "oven", "collection", "craft", "reserve"] as const;
 export type SceneId = (typeof sceneIds)[number];
 
 type Story = { title: string; body: string; cta: string };
@@ -17,6 +17,7 @@ export type Dictionary = {
     oven: Story;
     collection: { title: string; items: [string, string, string] };
     craft: Story;
+    reserve: { title: string; body: string; primary: string; secondary: string };
   };
 };
 
@@ -53,6 +54,12 @@ const en: Dictionary = {
       body: "Flour, water, salt and time. We add only what is in season and let the fire do the rest.",
       cta: "Explore the menu",
     },
+    reserve: {
+      title: "Your table is waiting.",
+      body: "Book an evening by the oven. Walk-ins are welcome when there is space, but tables go quickly on weekends.",
+      primary: "Reserve your table",
+      secondary: "View full menu",
+    },
   },
 };
 
@@ -88,6 +95,12 @@ const fa: Dictionary = {
       title: "مواد ساده. هنر جدی.",
       body: "آرد، آب، نمک و زمان. فقط آنچه در فصل خودش است را اضافه می‌کنیم و بقیه را به آتش می‌سپاریم.",
       cta: "دیدن منو",
+    },
+    reserve: {
+      title: "میز شما آماده است.",
+      body: "یک شب کنار کوره رزرو کنید. اگر جا باشد بدون رزرو هم می‌پذیریم، ولی آخر هفته‌ها میزها زود پر می‌شوند.",
+      primary: "رزرو میز",
+      secondary: "منوی کامل",
     },
   },
 };

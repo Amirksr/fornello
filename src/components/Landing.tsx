@@ -137,6 +137,17 @@ export function Landing({ locale }: { locale: Locale }) {
             )}
           </div>
         </Scene>
+
+        <Scene id="reserve" glow="80% 20%" dark={!!(sceneVideos.reserve || sceneImages.reserve)}>
+          {sceneVideos.reserve ? scrub(sceneVideos.reserve) : sceneImages.reserve && <Photo src={sceneImages.reserve} alt={scenes.reserve.title} />}
+          <div className={grid}>
+            <SceneText title={scenes.reserve.title} body={scenes.reserve.body}>
+              <a href="#reserve" className="btn-gold">{scenes.reserve.primary}</a>
+              <a href="#collection" className="btn-outline">{scenes.reserve.secondary}</a>
+            </SceneText>
+            {!sceneVideos.reserve && !sceneImages.reserve && <div className={art}><PizzaArt seed={51} className="tilt-low absolute inset-0 size-full" /></div>}
+          </div>
+        </Scene>
       </main>
     </div>
   );
