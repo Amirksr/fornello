@@ -1,6 +1,6 @@
 import type { Locale } from "./i18n";
 
-export const sceneIds = ["hero", "signature"] as const;
+export const sceneIds = ["hero", "signature", "layers"] as const;
 export type SceneId = (typeof sceneIds)[number];
 
 type Story = { title: string; body: string; cta: string };
@@ -13,6 +13,7 @@ export type Dictionary = {
   scenes: {
     hero: Story;
     signature: Story;
+    layers: Story & { eyebrow: string };
   };
 };
 
@@ -32,6 +33,12 @@ const en: Dictionary = {
       body: "San Marzano tomato, fior di latte and basil picked this morning. One pie we have not changed since opening night.",
       cta: "Explore the menu",
     },
+    layers: {
+      eyebrow: "Ingredients",
+      title: "Every layer matters",
+      body: "A slow-risen base, a bright tomato sauce and cheese that stretches. Each layer is made in-house every day.",
+      cta: "Explore more",
+    },
   },
 };
 
@@ -50,6 +57,12 @@ const fa: Dictionary = {
       title: "پیتزای امضای فورنلو",
       body: "گوجه سن‌مارزانو، موتزارلای تازه و ریحانی که همان صبح چیده شده. پیتزایی که از شب افتتاحیه تغییرش نداده‌ایم.",
       cta: "دیدن منو",
+    },
+    layers: {
+      eyebrow: "مواد اولیه",
+      title: "هر لایه اهمیت دارد",
+      body: "خمیری که آرام ور آمده، سس گوجهٔ شاداب و پنیری که کش می‌آید. همهٔ لایه‌ها هر روز در همین آشپزخانه تهیه می‌شوند.",
+      cta: "بیشتر بدانید",
     },
   },
 };

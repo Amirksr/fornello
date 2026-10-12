@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { getDictionary } from "@/lib/dictionaries";
 import { getDirection, type Locale } from "@/lib/i18n";
 import { sceneImages, sceneVideos, type SceneVideo } from "@/lib/images";
@@ -17,6 +18,8 @@ const art = "art relative mx-auto aspect-square w-full max-w-[42svh] md:max-w-no
 const scrub = (video: SceneVideo, eager = false, layout: "frame" | "band" = "frame") => (
   <ScrubVideo src={video.src} poster={video.poster} ox={video.ox} oxMobile={video.oxMobile} eager={eager} layout={layout} ratio={video.ratio} />
 );
+
+const spread = (direction: 1 | -1): CSSProperties => ({ transform: `translateY(calc(${direction} * (var(--p) * 34% + 4%)))` });
 
 export function Landing({ locale }: { locale: Locale }) {
   const t = getDictionary(locale);
@@ -50,6 +53,22 @@ export function Landing({ locale }: { locale: Locale }) {
           <div className={grid}>
             <SceneText title={scenes.signature.title} body={scenes.signature.body}>{toMenu}</SceneText>
             {!sceneVideos.signature && !sceneImages.signature && <div className={art}><PizzaArt seed={23} className="tilt absolute inset-0 size-full" /></div>}
+          </div>
+        </Scene>
+
+        <Scene id="layers" glow="65% 50%" dark={!!(sceneVideos.layers || sceneImages.layers)}>
+          {sceneVideos.layers ? scrub(sceneVideos.layers) : sceneImages.layers && <Photo src={sceneImages.layers} alt={scenes.layers.title} ratio={870 / 695} />}
+          <div className={grid}>
+            <SceneText eyebrow={scenes.layers.eyebrow} title={scenes.layers.title} body={scenes.layers.body}>
+              <a href="#collection" className="btn-outline">{scenes.layers.cta}</a>
+            </SceneText>
+            {!sceneVideos.layers && !sceneImages.layers && (
+              <div className={art}>
+                <div className="absolute inset-x-[8%] top-[26%] aspect-square" style={spread(1)}><PizzaArt seed={31} layers={["crust"]} className="squash size-full" /></div>
+                <div className="absolute inset-x-[8%] top-[26%] aspect-square"><PizzaArt seed={32} layers={["sauce"]} className="squash size-full" /></div>
+                <div className="absolute inset-x-[8%] top-[26%] aspect-square" style={spread(-1)}><PizzaArt seed={33} layers={["cheese", "basil"]} className="squash size-full" /></div>
+              </div>
+            )}
           </div>
         </Scene>
       </main>
