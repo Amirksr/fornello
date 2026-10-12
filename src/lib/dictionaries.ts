@@ -19,7 +19,15 @@ export type Dictionary = {
     craft: Story;
     reserve: { title: string; body: string; primary: string; secondary: string };
   };
+  footer: {
+    about: string;
+    columns: { title: string; links: { label: string; href: string }[] }[];
+    social: string[];
+    rights: string;
+  };
 };
+
+const toLinks = (pairs: [string, string][]) => pairs.map(([label, href]) => ({ label, href }));
 
 const en: Dictionary = {
   brand: "Fornello",
@@ -60,6 +68,16 @@ const en: Dictionary = {
       primary: "Reserve your table",
       secondary: "View full menu",
     },
+  },
+  footer: {
+    about: "Wood-fired pizza made from simple ingredients, baked fresh to order.",
+    columns: [
+      { title: "Menu", links: toLinks([["Pizzas","#collection"],["Starters","#collection"],["Desserts","#collection"],["Drinks","#collection"]]) },
+      { title: "Our pizza", links: toLinks([["Story","#craft"],["Ingredients","#layers"],["The oven","#oven"]]) },
+      { title: "Reserve", links: toLinks([["Contact","#reserve"],["Location","#reserve"]]) },
+    ],
+    social: ["Instagram", "Facebook", "YouTube"],
+    rights: "All rights reserved.",
   },
 };
 
@@ -102,6 +120,16 @@ const fa: Dictionary = {
       primary: "رزرو میز",
       secondary: "منوی کامل",
     },
+  },
+  footer: {
+    about: "پیتزای هیزمی از مواد ساده که تازه و سفارشی پخته می‌شود.",
+    columns: [
+      { title: "منو", links: toLinks([["پیتزاها","#collection"],["پیش‌غذا","#collection"],["دسر","#collection"],["نوشیدنی","#collection"]]) },
+      { title: "پیتزاهای ما", links: toLinks([["داستان ما","#craft"],["مواد اولیه","#layers"],["کوره","#oven"]]) },
+      { title: "رزرو", links: toLinks([["تماس","#reserve"],["آدرس","#reserve"]]) },
+    ],
+    social: ["اینستاگرام", "فیسبوک", "یوتیوب"],
+    rights: "تمامی حقوق محفوظ است.",
   },
 };
 
