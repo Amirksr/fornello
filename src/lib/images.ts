@@ -7,6 +7,7 @@
 export type ImageSlot = "hero" | "signature" | "layers" | "oven" | "collection" | "craft" | "craftEnd" | "reserve";
 export const sceneImages: Partial<Record<ImageSlot, string>> = {
   hero: "/images/hero-fire.jpg",
+  signature: "/images/signature.jpg",
 };
 
 /**
@@ -18,4 +19,5 @@ export type VideoSlot = "hero" | "signature" | "layers" | "oven" | "collection" 
 export type SceneVideo = { src: string; poster: string; ox?: number; oxMobile?: number; /** width / height of the file; used by the full-width "band" layout (collection) */ ratio?: number };
 export const sceneVideos: Partial<Record<VideoSlot, SceneVideo>> = {
   hero: { src: "/videos/hiro.mp4", poster: "/videos/hiro-poster.jpg", ox: 46, oxMobile: 48 },
+  signature: { src: "/videos/signature.mp4", poster: "/videos/signature-poster.jpg", ox: 46, oxMobile: 48 },
 };

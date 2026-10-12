@@ -44,6 +44,14 @@ export function Landing({ locale }: { locale: Locale }) {
             {!sceneVideos.hero && !sceneImages.hero && <div className={art}><PizzaArt seed={11} className="tilt absolute inset-0 size-full" /></div>}
           </div>
         </Scene>
+
+        <Scene id="signature" glow="70% 40%" dark={!!(sceneVideos.signature || sceneImages.signature)}>
+          {sceneVideos.signature ? scrub(sceneVideos.signature) : sceneImages.signature && <Photo src={sceneImages.signature} alt={scenes.signature.title} />}
+          <div className={grid}>
+            <SceneText title={scenes.signature.title} body={scenes.signature.body}>{toMenu}</SceneText>
+            {!sceneVideos.signature && !sceneImages.signature && <div className={art}><PizzaArt seed={23} className="tilt absolute inset-0 size-full" /></div>}
+          </div>
+        </Scene>
       </main>
     </div>
   );

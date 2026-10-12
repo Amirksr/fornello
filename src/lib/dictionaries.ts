@@ -1,6 +1,6 @@
 import type { Locale } from "./i18n";
 
-export const sceneIds = ["hero"] as const;
+export const sceneIds = ["hero", "signature"] as const;
 export type SceneId = (typeof sceneIds)[number];
 
 type Story = { title: string; body: string; cta: string };
@@ -12,6 +12,7 @@ export type Dictionary = {
   controls: { language: string; theme: string; chat: string; scene: string };
   scenes: {
     hero: Story;
+    signature: Story;
   };
 };
 
@@ -26,6 +27,11 @@ const en: Dictionary = {
       body: "Authentic Italian pizza, naturally leavened, hand-stretched and baked in under ninety seconds in a wood-fired oven.",
       cta: "Explore the menu",
     },
+    signature: {
+      title: "The Fornello Signature",
+      body: "San Marzano tomato, fior di latte and basil picked this morning. One pie we have not changed since opening night.",
+      cta: "Explore the menu",
+    },
   },
 };
 
@@ -38,6 +44,11 @@ const fa: Dictionary = {
     hero: {
       title: "ساخته‌شده با آتش.",
       body: "پیتزای اصیل ایتالیایی با خمیر طبیعی، کشیده‌شده با دست و پخته‌شده در کمتر از نود ثانیه در کوره هیزمی.",
+      cta: "دیدن منو",
+    },
+    signature: {
+      title: "پیتزای امضای فورنلو",
+      body: "گوجه سن‌مارزانو، موتزارلای تازه و ریحانی که همان صبح چیده شده. پیتزایی که از شب افتتاحیه تغییرش نداده‌ایم.",
       cta: "دیدن منو",
     },
   },
