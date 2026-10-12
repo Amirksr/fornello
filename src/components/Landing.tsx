@@ -2,7 +2,7 @@ import type { CSSProperties } from "react";
 import { getDictionary } from "@/lib/dictionaries";
 import { getDirection, type Locale } from "@/lib/i18n";
 import { sceneImages, sceneVideos, type SceneVideo } from "@/lib/images";
-import { OvenArt, PizzaArt } from "./Art";
+import { IngredientsArt, OvenArt, PizzaArt, type Ingredient } from "./Art";
 import { CollectionPhoto } from "./CollectionPhoto";
 import { Embers, Smoke } from "./Embers";
 import { Flame } from "./Flame";
@@ -19,6 +19,16 @@ const art = "art relative mx-auto aspect-square w-full max-w-[42svh] md:max-w-no
 const scrub = (video: SceneVideo, eager = false, layout: "frame" | "band" = "frame") => (
   <ScrubVideo src={video.src} poster={video.poster} ox={video.ox} oxMobile={video.oxMobile} eager={eager} layout={layout} ratio={video.ratio} />
 );
+
+const droppedIngredients: Ingredient[] = [
+  { kind: "tomato", left: 30, top: 52, size: 9, k: 0.1 },
+  { kind: "mozzarella", left: 46, top: 58, size: 11, k: 0.3 },
+  { kind: "tomato", left: 62, top: 54, size: 8, k: 0.5 },
+  { kind: "olive", left: 38, top: 66, size: 5, k: 0.2 },
+  { kind: "basil", left: 54, top: 48, size: 7, k: 0.4 },
+  { kind: "olive", left: 68, top: 66, size: 5, k: 0.6 },
+  { kind: "mozzarella", left: 24, top: 64, size: 8, k: 0.7 },
+];
 
 const spread = (direction: 1 | -1): CSSProperties => ({ transform: `translateY(calc(${direction} * (var(--p) * 34% + 4%)))` });
 
@@ -103,6 +113,26 @@ export function Landing({ locale }: { locale: Locale }) {
                     </div>
                   </figure>
                 ))}
+              </div>
+            )}
+          </div>
+        </Scene>
+
+        <Scene id="craft" glow="85% 25%" dark={!!(sceneVideos.craft || sceneImages.craft)}>
+          {sceneVideos.craft ? (
+            scrub(sceneVideos.craft)
+          ) : (
+            <>
+              {sceneImages.craft && <Photo src={sceneImages.craft} alt={scenes.craft.title} fade="out" ratio={725 / 698} />}
+              {sceneImages.craftEnd && <Photo src={sceneImages.craftEnd} alt={scenes.craft.title} fade="in" ratio={819 / 657} />}
+            </>
+          )}
+          <div className={grid}>
+            <SceneText title={scenes.craft.title} body={scenes.craft.body}>{toMenu}</SceneText>
+            {!sceneVideos.craft && !sceneImages.craft && (
+              <div className="art relative mx-auto aspect-[4/3] w-full max-w-2xl">
+                <div className="dough absolute inset-x-[16%] bottom-[8%] aspect-[2/1] rounded-[50%]" />
+                <IngredientsArt items={droppedIngredients} />
               </div>
             )}
           </div>

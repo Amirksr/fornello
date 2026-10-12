@@ -1,6 +1,6 @@
 import type { Locale } from "./i18n";
 
-export const sceneIds = ["hero", "signature", "layers", "oven", "collection"] as const;
+export const sceneIds = ["hero", "signature", "layers", "oven", "collection", "craft"] as const;
 export type SceneId = (typeof sceneIds)[number];
 
 type Story = { title: string; body: string; cta: string };
@@ -16,6 +16,7 @@ export type Dictionary = {
     layers: Story & { eyebrow: string };
     oven: Story;
     collection: { title: string; items: [string, string, string] };
+    craft: Story;
   };
 };
 
@@ -47,6 +48,11 @@ const en: Dictionary = {
       cta: "Explore the menu",
     },
     collection: { title: "The Collection", items: ["Margherita", "Fornello", "Diavola"] },
+    craft: {
+      title: "Simple ingredients. Serious craft.",
+      body: "Flour, water, salt and time. We add only what is in season and let the fire do the rest.",
+      cta: "Explore the menu",
+    },
   },
 };
 
@@ -78,6 +84,11 @@ const fa: Dictionary = {
       cta: "دیدن منو",
     },
     collection: { title: "مجموعه", items: ["مارگاریتا", "فورنلو", "دیاولا"] },
+    craft: {
+      title: "مواد ساده. هنر جدی.",
+      body: "آرد، آب، نمک و زمان. فقط آنچه در فصل خودش است را اضافه می‌کنیم و بقیه را به آتش می‌سپاریم.",
+      cta: "دیدن منو",
+    },
   },
 };
 

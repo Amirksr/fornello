@@ -11,6 +11,8 @@ export const sceneImages: Partial<Record<ImageSlot, string>> = {
   layers: "/images/layers.jpg",
   oven: "/images/oven.jpg",
   collection: "/images/collection.jpg",
+  craft: "/images/craft1.jpg",
+  craftEnd: "/images/craft2.jpg",
 };
 
 /**
@@ -27,4 +29,5 @@ export const sceneVideos: Partial<Record<VideoSlot, SceneVideo>> = {
   oven: { src: "/videos/oven.mp4", poster: "/videos/oven-poster.jpg", ox: 70, oxMobile: 62 },
   // Pizza names are printed inside this clip (English only), so no text overlay is added on top of it.
   collection: { src: "/videos/collection.mp4", poster: "/videos/collection-poster.jpg", ratio: 1280 / 720 },
+  craft: { src: "/videos/craft.mp4", poster: "/videos/craft-poster.jpg", ox: 50, oxMobile: 45 },
 };
