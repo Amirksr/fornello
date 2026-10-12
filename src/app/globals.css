@@ -111,3 +111,35 @@ body { background: var(--bg); color: var(--fg); font-family: var(--font-sans); -
   .scene { height: 100svh; --p: 0.6; }
   .flame { animation: none; }
 }
+
+/* Photo scenes keep the dark cinematic palette in both themes. */
+.scene-dark {
+  --bg: #0f0c0a; --surface: #17120f; --fg: #f5ece0; --muted: #b8aa99; --accent: #d8b878;
+  --ember: #f08a2c; --line: rgb(245 236 224 / 0.22); --glow-strength: 34%;
+  color-scheme: dark;
+}
+.photo-wrap {
+  position: absolute; inset-inline-end: 0; inset-block: 0; width: 100%;
+  -webkit-mask-image: linear-gradient(to top, #000 55%, transparent 100%);
+  mask-image: linear-gradient(to top, #000 55%, transparent 100%);
+}
+.photo-wrap img { transform-origin: 50% 100%; transform: scale(calc(var(--zoom, 1.1) + var(--p) * 0.12)); }
+.fit-ratio { --zoom: 1; }
+@media (min-width: 768px) {
+  .photo-wrap {
+    width: 74%;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 38%);
+    mask-image: linear-gradient(to right, transparent 0%, #000 38%);
+  }
+  .photo-wrap:lang(fa), :lang(fa) .photo-wrap {
+    -webkit-mask-image: linear-gradient(to left, transparent 0%, #000 38%);
+    mask-image: linear-gradient(to left, transparent 0%, #000 38%);
+  }
+}
+@media (max-width: 767px) { .photo-wrap { inset-block-start: 55%; } }
+
+/* Craft: two stacked photos cross-fade as the scene scrolls. */
+.photo-fade-out { opacity: clamp(0, calc(1 - (var(--p) - 0.12) * 3), 1); }
+.photo-fade-in  { opacity: clamp(0, calc((var(--p) - 0.12) * 3), 1); }
+
+@media (min-width: 768px) { .fit-ratio { width: auto; height: 100%; aspect-ratio: var(--ar); } }
