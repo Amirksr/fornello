@@ -143,3 +143,61 @@ body { background: var(--bg); color: var(--fg); font-family: var(--font-sans); -
 .photo-fade-in  { opacity: clamp(0, calc((var(--p) - 0.12) * 3), 1); }
 
 @media (min-width: 768px) { .fit-ratio { width: auto; height: 100%; aspect-ratio: var(--ar); } }
+
+/* Hero: black-background photo blends into the stage; it drifts (parallax + idle float), never rotates. */
+.photo-blend { mix-blend-mode: screen; }
+.photo-drift img {
+  transform-origin: 50% 60%;
+  transform: translateY(calc(var(--p) * -3%)) scale(calc(var(--zoom, 1.1) + var(--p) * 0.12));
+  animation: bob 7s ease-in-out infinite alternate;
+}
+@keyframes bob { from { translate: 0 0; } to { translate: 0 -7px; } }
+
+/* Oven fire behind the pizza: blurred flame tongues that lick and flicker. */
+.flame-wrap { position: absolute; inset-block-start: 3svh; inset-inline-end: 3vw; width: 40vmin; height: 46vmin; }
+.flame-glow {
+  position: absolute; inset: -35% -35% -10% -35%; filter: blur(22px);
+  background: radial-gradient(60% 60% at 48% 78%, rgb(255 140 40 / 0.6), transparent 70%);
+  animation: glow 2.6s ease-in-out infinite alternate;
+}
+.tongue {
+  position: absolute; bottom: 0; inset-inline-start: var(--x); width: var(--w); height: var(--h);
+  border-radius: 50% 50% 45% 45% / 78% 78% 22% 22%;
+  background: radial-gradient(ellipse at 50% 88%, #fff6c4 0%, #ffbf4a 30%, #ff7a1a 58%, rgb(220 60 10 / 0) 74%);
+  filter: blur(9px); mix-blend-mode: screen; transform-origin: 50% 100%;
+  animation: lick var(--d) ease-in-out var(--delay) infinite alternate;
+}
+@keyframes lick {
+  from { transform: scale(0.92, 0.82) skewX(calc(var(--skew) * -1)); opacity: 0.85; }
+  to   { transform: scale(1.06, 1.18) skewX(var(--skew)); opacity: 1; }
+}
+@keyframes glow { from { opacity: 0.75; } to { opacity: 1; } }
+@media (max-width: 767px) { .flame-wrap { display: none; } }
+
+/* Sparks rise, sway sideways and fade; smoke blobs drift up and spread. */
+.ember {
+  position: absolute; border-radius: 9999px; opacity: 0; filter: blur(var(--blur, 0px));
+  box-shadow: 0 0 calc(var(--s) * 3) calc(var(--s) * 0.8) rgb(255 120 30 / 0.8);
+  animation: rise var(--dur, 8s) linear var(--delay, 0s) infinite, sway calc(var(--dur, 8s) / 2.6) ease-in-out var(--delay, 0s) infinite alternate;
+}
+@keyframes rise {
+  0%   { opacity: 0; translate: 0 0; scale: 1; }
+  10%  { opacity: 1; }
+  70%  { opacity: 0.7; }
+  100% { opacity: 0; translate: var(--dx, 0px) calc(var(--rise, 40svh) * -1); scale: 0.3; }
+}
+@keyframes sway { from { transform: translateX(calc(var(--sway, 10px) * -1)); } to { transform: translateX(var(--sway, 10px)); } }
+.smoke {
+  position: absolute; aspect-ratio: 1; border-radius: 9999px; opacity: 0; filter: blur(22px);
+  background: radial-gradient(circle, rgb(215 200 185 / 0.22), transparent 65%);
+  animation: smoke var(--dur, 16s) ease-out var(--delay, 0s) infinite;
+}
+@keyframes smoke {
+  0%   { opacity: 0; translate: 0 0; scale: 0.7; }
+  25%  { opacity: 1; }
+  100% { opacity: 0; translate: var(--dx, 0px) -32svh; scale: 1.5; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ember, .smoke, .tongue, .flame-glow, .photo-drift img { animation: none; }
+  .ember, .smoke { display: none; }
+}

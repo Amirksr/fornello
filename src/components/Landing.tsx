@@ -2,6 +2,8 @@ import { getDictionary } from "@/lib/dictionaries";
 import { getDirection, type Locale } from "@/lib/i18n";
 import { sceneImages } from "@/lib/images";
 import { PizzaArt } from "./Art";
+import { Embers, Smoke } from "./Embers";
+import { Flame } from "./Flame";
 import { Header } from "./Header";
 import { Photo } from "./Photo";
 import { Scene } from "./Scene";
@@ -21,7 +23,15 @@ export function Landing({ locale }: { locale: Locale }) {
       <Header locale={locale} t={t} />
       <main>
         <Scene id="hero" glow="82% 22%" dark={!!sceneImages.hero}>
-          {sceneImages.hero && <Photo src={sceneImages.hero} alt={scenes.hero.title} priority ratio={1} zoom={1.02} />}
+          {sceneImages.hero && (
+            <>
+              <Flame />
+              <Photo src={sceneImages.hero} alt={scenes.hero.title} priority blend drift ratio={1} zoom={1.02}>
+                <Smoke />
+                <Embers />
+              </Photo>
+            </>
+          )}
           <div className={grid}>
             <SceneText level={1} title={scenes.hero.title} body={scenes.hero.body}>{toMenu}</SceneText>
             {!sceneImages.hero && <div className={art}><PizzaArt seed={11} className="tilt absolute inset-0 size-full" /></div>}
