@@ -73,6 +73,24 @@ body { background: var(--bg); color: var(--fg); font-family: var(--font-sans); -
   background: linear-gradient(to bottom, var(--bg), transparent);
   opacity: clamp(0, calc(1 - var(--p) * 8), 1);
 }
+.tilt     { transform: perspective(1100px) rotateX(calc(52deg - var(--p) * 10deg)) rotateZ(calc(var(--p) * 22deg)) scale(calc(1 + var(--p) * 0.12)); filter: drop-shadow(0 3.5rem 2.5rem rgb(0 0 0 / 0.45)); }
+.tilt-low { transform: perspective(1100px) rotateX(calc(64deg - var(--p) * 6deg)) rotateZ(calc(var(--p) * -10deg)) scale(calc(1.05 + var(--p) * 0.1)); filter: drop-shadow(0 3rem 2.5rem rgb(0 0 0 / 0.5)); }
+.squash   { transform: scaleY(0.46); filter: drop-shadow(0 1.2rem 1rem rgb(0 0 0 / 0.4)); }
+.squash-soft { transform: scaleY(0.66); filter: drop-shadow(0 1.5rem 1.2rem rgb(0 0 0 / 0.4)); }
+.float    { transform: translateY(calc(var(--p) * -7svh)) rotate(calc(var(--rot) * (1 - var(--p) * 0.7))); }
+.oven     { transform: scale(calc(1 + var(--p) * 0.16)); }
+.dough {
+  background: radial-gradient(ellipse at 40% 30%, #fbf3e2, #e7d6b4 70%, #c9b48a);
+  box-shadow: 0 2rem 3rem rgb(0 0 0 / 0.4);
+  transform-origin: 50% 100%;
+  transform: scale(calc(0.62 + var(--p) * 0.38), calc(0.95 - var(--p) * 0.5));
+}
+.drop {
+  translate: 0 calc((1 - min(1, var(--p) * (1.5 + var(--k)))) * -80svh);
+  box-shadow: 0 0.4rem 0.6rem rgb(0 0 0 / 0.35);
+}
+.flame { transform-origin: 50% 100%; animation: flicker 2.4s ease-in-out infinite alternate; }
+@keyframes flicker { from { transform: scale(1, 1); } to { transform: scale(1.04, 1.08) skewX(1.5deg); } }
 
 .theme-icon-sun { display: none; }
 [data-theme="light"] .theme-icon-moon { display: none; }
@@ -91,4 +109,5 @@ body { background: var(--bg); color: var(--fg); font-family: var(--font-sans); -
 
 @media (prefers-reduced-motion: reduce) {
   .scene { height: 100svh; --p: 0.6; }
+  .flame { animation: none; }
 }

@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Pick<Props, "params">): Promi
   const { locale } = await params;
   if (!isLocale(locale)) return {};
   const t = getDictionary(locale);
-  return { title: `${t.brand} — ${t.tagline}`, description: t.tagline };
+  return { title: `${t.brand} — ${t.tagline}`, description: t.scenes.hero.body };
 }
 
 export default async function LocaleLayout({ children, params }: Props) {

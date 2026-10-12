@@ -1,5 +1,6 @@
 import { getDictionary } from "@/lib/dictionaries";
 import { getDirection, isLocale, otherLocale, resolveLocale } from "@/lib/i18n";
+import { mulberry32 } from "@/lib/random";
 import { clamp, sceneProgress } from "@/lib/scroll";
 import { THEME_KEY, applyTheme, nextTheme, parseTheme } from "@/lib/theme";
 
@@ -74,5 +75,16 @@ describe("theme", () => {
     expect(() => applyTheme("dark")).not.toThrow();
     expect(document.documentElement.dataset.theme).toBe("dark");
     spy.mockRestore();
+  });
+});
+
+describe("random", () => {
+  it("is deterministic and within [0,1)", () => {
+    const a = mulberry32(7);
+    const b = mulberry32(7);
+    const seq = Array.from({ length: 50 }, () => a());
+    expect(seq).toEqual(Array.from({ length: 50 }, () => b()));
+    expect(seq.every((n) => n >= 0 && n < 1)).toBe(true);
+    expect(mulberry32(8)()).not.toBe(seq[0]);
   });
 });
