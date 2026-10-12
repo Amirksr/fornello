@@ -107,3 +107,24 @@ describe("videoTime", () => {
     expect(videoTime(0.5, 0.01)).toBe(0); // clip shorter than one frame
   });
 });
+
+describe("scene transitions (CSS)", () => {
+  // jsdom doesn't apply stylesheets, so guard the rules in the source: scenes must not fade to an empty stage at their end.
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const css = (require("fs") as typeof import("fs")).readFileSync(`${process.cwd()}/src/app/globals.css`, "utf8");
+  const block = (selector: string) => css.match(new RegExp(`\\n${selector.replace(/[.]/g, "\\.")}\\s*\\{([^}]*)\\}`))?.[1] ?? "";
+
+  it("does not fade scene text, photos or artwork out near the end of the scroll", () => {
+    expect(block(".copy")).not.toMatch(/opacity/);
+    expect(block(".art")).not.toMatch(/opacity/);
+    expect(block(".photo-wrap")).not.toMatch(/opacity/);
+    expect(block(".photo-fade-in")).not.toMatch(/max\(/);
+    expect(block(".photo-fade-in")).toMatch(/opacity/); // the craft cross-fade itself still works
+  });
+
+  it("softens the leading edge of each scene only at the start of its scroll", () => {
+    const edge = block(".stage::after");
+    expect(edge).toMatch(/linear-gradient\(to bottom, var\(--bg\), transparent\)/);
+    expect(edge).toMatch(/opacity:\s*clamp\(0, calc\(1 - var\(--p\) \* 8\), 1\)/);
+  });
+});
