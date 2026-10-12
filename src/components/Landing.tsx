@@ -3,6 +3,7 @@ import { getDictionary } from "@/lib/dictionaries";
 import { getDirection, type Locale } from "@/lib/i18n";
 import { sceneImages, sceneVideos, type SceneVideo } from "@/lib/images";
 import { OvenArt, PizzaArt } from "./Art";
+import { CollectionPhoto } from "./CollectionPhoto";
 import { Embers, Smoke } from "./Embers";
 import { Flame } from "./Flame";
 import { Header } from "./Header";
@@ -77,6 +78,33 @@ export function Landing({ locale }: { locale: Locale }) {
           <div className={grid}>
             <SceneText title={scenes.oven.title} body={scenes.oven.body}>{toMenu}</SceneText>
             {!sceneVideos.oven && !sceneImages.oven && <div className={art}><OvenArt className="oven absolute inset-0 m-auto h-full w-full" /></div>}
+          </div>
+        </Scene>
+
+        <Scene id="collection" glow="50% 70%" dark={!!(sceneVideos.collection || sceneImages.collection)}>
+          {sceneVideos.collection
+            ? scrub(sceneVideos.collection, false, "band")
+            : sceneImages.collection && (
+                <CollectionPhoto src={sceneImages.collection} alt={scenes.collection.title} labels={[scenes.collection.items[0], scenes.collection.items[2]]} />
+              )}
+          <div className="relative mx-auto flex h-full max-w-6xl flex-col items-center px-5 pt-24 md:px-10">
+            <h2 className="title text-center font-display text-4xl text-fg uppercase md:text-6xl">{scenes.collection.title}</h2>
+            {!sceneVideos.collection && !sceneImages.collection && (
+              <div className="relative mt-6 w-full flex-1">
+                {[
+                  { name: scenes.collection.items[0], seed: 41, cls: "start-0 top-[10%] w-[34%]", rot: -14 },
+                  { name: scenes.collection.items[1], seed: 42, cls: "start-[28%] top-[18%] w-[44%]", rot: 0 },
+                  { name: scenes.collection.items[2], seed: 43, cls: "end-0 top-[10%] w-[34%]", rot: 14 },
+                ].map((item) => (
+                  <figure key={item.seed} className={`absolute ${item.cls}`}>
+                    <figcaption className="mb-1 text-center font-display text-lg text-fg md:text-2xl">{item.name}</figcaption>
+                    <div className="float" style={{ ["--rot" as string]: `${item.rot}deg` }}>
+                      <PizzaArt seed={item.seed} className="squash-soft w-full" />
+                    </div>
+                  </figure>
+                ))}
+              </div>
+            )}
           </div>
         </Scene>
       </main>

@@ -153,6 +153,10 @@ body { background: var(--bg); color: var(--fg); font-family: var(--font-sans); -
   mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent), linear-gradient(to right, transparent, #000 9%, #000 91%, transparent);
   mask-composite: intersect;
 }
+.collection-label {
+  position: absolute; top: 18%; transform: translate(-50%, -50%); white-space: nowrap;
+  font-family: var(--font-display); font-size: clamp(1rem, 2.1vw, 1.6rem); color: var(--fg);
+}
 
 @media (min-width: 768px) { .fit-ratio { width: auto; height: 100%; aspect-ratio: var(--ar); } }
 @media (max-width: 767px) { .collection-band { bottom: 20svh; } }

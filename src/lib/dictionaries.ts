@@ -1,6 +1,6 @@
 import type { Locale } from "./i18n";
 
-export const sceneIds = ["hero", "signature", "layers", "oven"] as const;
+export const sceneIds = ["hero", "signature", "layers", "oven", "collection"] as const;
 export type SceneId = (typeof sceneIds)[number];
 
 type Story = { title: string; body: string; cta: string };
@@ -15,6 +15,7 @@ export type Dictionary = {
     signature: Story;
     layers: Story & { eyebrow: string };
     oven: Story;
+    collection: { title: string; items: [string, string, string] };
   };
 };
 
@@ -45,6 +46,7 @@ const en: Dictionary = {
       body: "Our dome oven runs at 450°C. The flames leave the blistered crust and smoky edge you only get from wood.",
       cta: "Explore the menu",
     },
+    collection: { title: "The Collection", items: ["Margherita", "Fornello", "Diavola"] },
   },
 };
 
@@ -75,6 +77,7 @@ const fa: Dictionary = {
       body: "کورهٔ گنبدی ما روی ۴۵۰ درجه کار می‌کند. شعله، لبهٔ تاول‌زده و عطر دودی‌ای را می‌دهد که فقط هیزم می‌سازد.",
       cta: "دیدن منو",
     },
+    collection: { title: "مجموعه", items: ["مارگاریتا", "فورنلو", "دیاولا"] },
   },
 };
 
