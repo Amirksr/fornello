@@ -1,7 +1,11 @@
+import Link from "next/link";
 import type { Dictionary } from "@/lib/dictionaries";
+import type { Locale } from "@/lib/i18n";
 
-export function Footer({ t }: { t: Dictionary }) {
+/** Link targets in the dictionary are written without the locale ("#craft", "/menu#desserts"). */
+export function Footer({ locale, t }: { locale: Locale; t: Dictionary }) {
   const { footer } = t;
+  const to = (href: string) => `/${locale}${href}`;
   return (
     <footer className="relative z-10 bg-surface px-5 pt-16 pb-24 md:px-10">
       <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-[1.4fr_repeat(3,1fr)]">
@@ -16,9 +20,9 @@ export function Footer({ t }: { t: Dictionary }) {
             <ul className="mt-4 space-y-2.5 text-sm text-muted">
               {column.links.map((link) => (
                 <li key={link.label}>
-                  <a href={link.href} className="transition-colors hover:text-accent">
+                  <Link href={to(link.href)} className="transition-colors hover:text-accent">
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -32,9 +36,9 @@ export function Footer({ t }: { t: Dictionary }) {
         <ul className="flex gap-6">
           {footer.social.map((name) => (
             <li key={name}>
-              <a href="#hero" className="transition-colors hover:text-accent">
+              <Link href={to("#hero")} className="transition-colors hover:text-accent">
                 {name}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

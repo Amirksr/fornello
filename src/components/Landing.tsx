@@ -151,7 +151,7 @@ export function Landing({ locale }: { locale: Locale }) {
           </div>
         </Scene>
       </main>
-      <Footer t={t} />
+      <Footer locale={locale} t={t} />
       <SceneDots label={t.controls.scene} />
       <a href="#reserve" aria-label={t.controls.chat} className="fixed end-5 bottom-14 z-40 grid size-11 place-items-center rounded-full bg-accent text-bg shadow-lg transition-transform hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fg">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-7l-5 4v-4H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z" /></svg>
