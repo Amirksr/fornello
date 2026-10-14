@@ -20,7 +20,7 @@ Rules:
 - **Conventional Commits**: `type(scope): summary` in the imperative, at most 72 characters, with a short body that
   explains *why*. Types: `feat`, `fix`, `style`, `refactor`, `test`, `docs`, `chore`.
   Scopes: `i18n`, `theme`, `header`, `app`, `scenes`, `hero`, `signature`, `layers`, `oven`, `collection`, `craft`,
-  `reserve`, `page`, `footer`, `landing`.
+  `reserve`, `page`, `footer`, `landing`, `menu`, `nav`.
 
 ## Adding or changing a section
 
@@ -29,6 +29,11 @@ Rules:
 3. Media: files in `public/videos` and `public/images`, registered in `src/lib/images.ts`.
 4. Styles only if something new is needed (`src/app/globals.css`).
 5. Tests next to the logic they cover (`src/__tests__`).
+
+## Menu items
+
+Dishes and prices live in `src/lib/menu.ts` (Toman, both languages). Keep an item's `id` stable: other parts of the
+site connect to it. A menu change is its own `feat(menu)` or `fix(menu)` commit; page copy is in the dictionary.
 
 ## Scroll videos
 

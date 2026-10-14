@@ -14,7 +14,17 @@ npm run build && npm start
 - **Cinematic scroll**: each section is a tall scroll area with a pinned stage. Scroll progress is written to a `--p` CSS variable (no React re-renders) and `src/app/globals.css` animates from it.
 - **Bilingual**: `/fa` (RTL) and `/en` (LTR). Copy lives in `src/lib/dictionaries.ts`; a shared type and a test keep both languages in sync.
 - **Dark / light**: header toggle, saved in localStorage, applied before first paint. Dark is the default.
+- **Menu page**: `/fa/menu` and `/en/menu`, linked from every menu button, the header and the footer (see below).
 - **Accessibility**: visible focus styles; `prefers-reduced-motion` disables the pinned scroll effects.
+
+## Menu page
+All dishes are in one typed file, `src/lib/menu.ts`: four categories (pizzas, starters, desserts, drinks), each item with
+a stable `id`, a name and a description in Persian and English, a price in **Toman** and optional tags (`vegetarian`, `spicy`).
+`formatPrice()` shows Persian digits for fa (`۸۹۰٬۰۰۰`) and Latin digits for en.
+- To change the menu, edit that file only. Tests check that both languages exist (in the right script), ids are unique and prices are whole numbers in steps of 5,000.
+- The page (`MenuPage`) lists every category as a labelled section under a sticky category bar, so the whole menu can be read, printed and indexed without JavaScript. Page copy is in the dictionary (`menu`).
+- The current prices are estimates for a wood-fired Italian restaurant in Tehran in autumn 2026; replace them with the real ones.
+- Pizza names are shared by `id` (`margherita`, `marinara`, `diavola`, `quattro-formaggi`, `capricciosa`, `fornello`), so other parts of the site can reuse them.
 
 ## Videos (scroll-scrubbed) and photos
 All seven scenes (hero, signature, layers, oven, collection, craft, reserve) play a muted video **as you scroll**: scrolling forward plays the clip forward, scrolling back
