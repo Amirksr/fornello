@@ -1,4 +1,5 @@
 import type { Locale } from "./i18n";
+import type { MenuCategoryId, MenuTag } from "./menu";
 
 export const sceneIds = ["hero", "signature", "layers", "oven", "collection", "craft", "reserve"] as const;
 export type SceneId = (typeof sceneIds)[number];
@@ -18,6 +19,15 @@ export type Dictionary = {
     collection: { title: string; items: [string, string, string] };
     craft: Story;
     reserve: { title: string; body: string; primary: string; secondary: string };
+  };
+  menu: {
+    title: string;
+    description: string;
+    note: string;
+    navLabel: string;
+    currency: string;
+    categories: Record<MenuCategoryId, string>;
+    tags: Record<MenuTag, string>;
   };
   footer: {
     about: string;
@@ -68,6 +78,15 @@ const en: Dictionary = {
       primary: "Reserve your table",
       secondary: "View full menu",
     },
+  },
+  menu: {
+    title: "Our menu",
+    description: "Wood-fired pizzas, starters, desserts and drinks.",
+    note: "Prices are in Toman.",
+    navLabel: "Menu categories",
+    currency: "Toman",
+    categories: { pizzas: "Pizzas", starters: "Starters", desserts: "Desserts", drinks: "Drinks" },
+    tags: { vegetarian: "Vegetarian", spicy: "Spicy" },
   },
   footer: {
     about: "Wood-fired pizza made from simple ingredients, baked fresh to order.",
@@ -120,6 +139,15 @@ const fa: Dictionary = {
       primary: "رزرو میز",
       secondary: "منوی کامل",
     },
+  },
+  menu: {
+    title: "منوی ما",
+    description: "پیتزاهای هیزمی، پیش‌غذا، دسر و نوشیدنی.",
+    note: "قیمت‌ها به تومان است.",
+    navLabel: "دسته‌بندی منو",
+    currency: "تومان",
+    categories: { pizzas: "پیتزاها", starters: "پیش‌غذاها", desserts: "دسرها", drinks: "نوشیدنی‌ها" },
+    tags: { vegetarian: "گیاهی", spicy: "تند" },
   },
   footer: {
     about: "پیتزای هیزمی از مواد ساده که تازه و سفارشی پخته می‌شود.",
