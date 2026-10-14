@@ -49,6 +49,17 @@ describe.each(["en", "fa"] as const)("Landing (%s)", (locale) => {
     expect(dots).toHaveLength(sceneIds.length);
   });
 
+  it("points every menu button to the menu page", () => {
+    const { container } = render(<Landing locale={locale} />);
+    const buttons = [t.scenes.hero.cta, t.scenes.reserve.secondary];
+    for (const label of buttons) {
+      const links = Array.from(container.querySelectorAll("a")).filter((a) => a.textContent === label);
+      expect(links.length).toBeGreaterThan(0);
+      for (const link of links) expect(link).toHaveAttribute("href", `/${locale}/menu`);
+    }
+    expect(screen.getByRole("link", { name: locale === "fa" ? "منو" : "Menu" })).toHaveAttribute("href", `/${locale}/menu`);
+  });
+
   it("links the language switch to the other locale", () => {
     render(<Landing locale={locale} />);
     const link = screen.getByRole("link", { name: t.controls.language });

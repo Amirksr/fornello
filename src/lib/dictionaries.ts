@@ -91,7 +91,7 @@ const en: Dictionary = {
   footer: {
     about: "Wood-fired pizza made from simple ingredients, baked fresh to order.",
     columns: [
-      { title: "Menu", links: toLinks([["Pizzas","#collection"],["Starters","#collection"],["Desserts","#collection"],["Drinks","#collection"]]) },
+      { title: "Menu", links: toLinks([["Pizzas","/menu#pizzas"],["Starters","/menu#starters"],["Desserts","/menu#desserts"],["Drinks","/menu#drinks"]]) },
       { title: "Our pizza", links: toLinks([["Story","#craft"],["Ingredients","#layers"],["The oven","#oven"]]) },
       { title: "Reserve", links: toLinks([["Contact","#reserve"],["Location","#reserve"]]) },
     ],
@@ -152,7 +152,7 @@ const fa: Dictionary = {
   footer: {
     about: "پیتزای هیزمی از مواد ساده که تازه و سفارشی پخته می‌شود.",
     columns: [
-      { title: "منو", links: toLinks([["پیتزاها","#collection"],["پیش‌غذا","#collection"],["دسر","#collection"],["نوشیدنی","#collection"]]) },
+      { title: "منو", links: toLinks([["پیتزاها","/menu#pizzas"],["پیش‌غذاها","/menu#starters"],["دسرها","/menu#desserts"],["نوشیدنی‌ها","/menu#drinks"]]) },
       { title: "پیتزاهای ما", links: toLinks([["داستان ما","#craft"],["مواد اولیه","#layers"],["کوره","#oven"]]) },
       { title: "رزرو", links: toLinks([["تماس","#reserve"],["آدرس","#reserve"]]) },
     ],

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { CSSProperties } from "react";
 import { getDictionary } from "@/lib/dictionaries";
 import { getDirection, type Locale } from "@/lib/i18n";
@@ -37,7 +38,8 @@ const spread = (direction: 1 | -1): CSSProperties => ({ transform: `translateY(c
 export function Landing({ locale }: { locale: Locale }) {
   const t = getDictionary(locale);
   const { scenes } = t;
-  const toMenu = <a href="#collection" className="btn-outline">{scenes.hero.cta}</a>;
+  const menuHref = `/${locale}/menu`;
+  const toMenu = <Link href={menuHref} className="btn-outline">{scenes.hero.cta}</Link>;
 
   return (
     <div dir={getDirection(locale)} lang={locale}>
@@ -145,7 +147,7 @@ export function Landing({ locale }: { locale: Locale }) {
           <div className={grid}>
             <SceneText title={scenes.reserve.title} body={scenes.reserve.body}>
               <a href="#reserve" className="btn-gold">{scenes.reserve.primary}</a>
-              <a href="#collection" className="btn-outline">{scenes.reserve.secondary}</a>
+              <Link href={menuHref} className="btn-outline">{scenes.reserve.secondary}</Link>
             </SceneText>
             {!sceneVideos.reserve && !sceneImages.reserve && <div className={art}><PizzaArt seed={51} className="tilt-low absolute inset-0 size-full" /></div>}
           </div>

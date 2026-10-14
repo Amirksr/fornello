@@ -21,10 +21,10 @@ function SiteLink({ href, children, ...rest }: ComponentProps<"a">) {
 export function Header({ locale, t, path = "" }: { locale: Locale; t: Dictionary; path?: string }) {
   const home = path === "" ? "" : `/${locale}`;
   const links = [
-    { href: `${home}#collection`, label: t.nav.menu },
-    { href: `${home}#signature`, label: t.nav.pizza },
-    { href: `${home}#craft`, label: t.nav.story },
-    { href: `${home}#reserve`, label: t.nav.reserve },
+    { href: `/${locale}/menu`, label: t.nav.menu, current: path === "/menu" },
+    { href: `${home}#signature`, label: t.nav.pizza, current: false },
+    { href: `${home}#craft`, label: t.nav.story, current: false },
+    { href: `${home}#reserve`, label: t.nav.reserve, current: false },
   ];
   const other = otherLocale(locale);
   return (
@@ -38,7 +38,12 @@ export function Header({ locale, t, path = "" }: { locale: Locale; t: Dictionary
         </SiteLink>
         <nav className="hidden items-center gap-8 text-xs tracking-wider text-fg/80 uppercase md:flex" aria-label="Primary">
           {links.map((link) => (
-            <SiteLink key={link.href} href={link.href} className="transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
+            <SiteLink
+              key={link.href}
+              href={link.href}
+              aria-current={link.current ? "page" : undefined}
+              className="transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent aria-[current=page]:text-accent"
+            >
               {link.label}
             </SiteLink>
           ))}

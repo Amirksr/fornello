@@ -9,7 +9,7 @@ describe("Header", () => {
   it("uses same-page anchors on the landing page and offers the other language", () => {
     render(<Header locale="fa" t={getDictionary("fa")} />);
     const nav = screen.getByRole("navigation", { name: "Primary" });
-    expect(hrefs(nav)).toEqual(["#collection", "#signature", "#craft", "#reserve"]);
+    expect(hrefs(nav)).toEqual(["/fa/menu", "#signature", "#craft", "#reserve"]);
     expect(screen.getByRole("link", { name: "English" })).toHaveAttribute("href", "/en");
     expect(screen.getAllByRole("link")[0]).toHaveAttribute("href", "#hero");
   });
@@ -17,7 +17,8 @@ describe("Header", () => {
   it("leads back to the landing page from other pages and keeps the page when switching language", () => {
     render(<Header locale="en" t={getDictionary("en")} path="/menu" />);
     const nav = screen.getByRole("navigation", { name: "Primary" });
-    expect(hrefs(nav)).toEqual(["/en#collection", "/en#signature", "/en#craft", "/en#reserve"]);
+    expect(hrefs(nav)).toEqual(["/en/menu", "/en#signature", "/en#craft", "/en#reserve"]);
+    expect(within(nav).getByRole("link", { name: "Menu" })).toHaveAttribute("aria-current", "page");
     expect(screen.getByRole("link", { name: "فارسی" })).toHaveAttribute("href", "/fa/menu");
     expect(screen.getAllByRole("link")[0]).toHaveAttribute("href", "/en#hero");
   });
@@ -30,5 +31,12 @@ describe("Footer", () => {
     expect(links.length).toBeGreaterThan(8);
     for (const href of links) expect(href.startsWith(`/${locale}`)).toBe(true);
     expect(links).toContain(`/${locale}#craft`);
+  });
+
+  it.each(["en", "fa"] as const)("links the menu column to the menu categories (%s)", (locale) => {
+    const t = getDictionary(locale);
+    const { container } = render(<Footer locale={locale} t={t} />);
+    const links = Array.from(container.querySelectorAll("a")).map((a) => a.getAttribute("href"));
+    for (const id of ["pizzas", "starters", "desserts", "drinks"]) expect(links).toContain(`/${locale}/menu#${id}`);
   });
 });
