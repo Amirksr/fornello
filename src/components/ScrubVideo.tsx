@@ -72,7 +72,7 @@ export function ScrubVideo({ src, poster, ox = 50, oxMobile = ox, start = 0, end
       poster={poster}
       muted
       playsInline
-      preload={eager ? "auto" : "metadata"}
+      preload={eager ? "auto" : "none"}
       disablePictureInPicture
       aria-hidden="true"
       tabIndex={-1}

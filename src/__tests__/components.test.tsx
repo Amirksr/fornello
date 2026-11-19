@@ -130,12 +130,12 @@ describe("Photo and video scenes", () => {
     );
     expect(preloads).toEqual([
       "auto",
-      "metadata",
-      "metadata",
-      "metadata",
-      "metadata",
-      "metadata",
-      "metadata",
+      "none",
+      "none",
+      "none",
+      "none",
+      "none",
+      "none",
     ]);
   });
 
