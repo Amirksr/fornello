@@ -107,7 +107,7 @@ describe("ScrubVideo", () => {
     const top = { value: 5000 };
     const { container } = mount(top);
     flush();
-    expect(container.querySelector("video")).toHaveAttribute("preload", "metadata");
+    expect(container.querySelector("video")).toHaveAttribute("preload", "none");
     top.value = 1200;
     window.dispatchEvent(new Event("scroll"));
     flush();
